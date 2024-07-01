@@ -1,10 +1,7 @@
 package org.example.demo.domain.comment;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.example.demo.domain.post.Post;
 import org.example.demo.domain.user.User;
 
@@ -12,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
