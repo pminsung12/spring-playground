@@ -3,7 +3,7 @@ name: Development Auto Deployment
 on:
   push:
     branches:
-      - level1
+      - level/1
 
 concurrency:
   group: deploy_dev
