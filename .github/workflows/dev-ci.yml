@@ -3,7 +3,10 @@ name: Development Auto Deployment
 on:
   push:
     branches:
-      - level/1
+      - level/**
+  pull_request:
+    branches:
+      - level/**
 
 concurrency:
   group: deploy_dev
@@ -68,3 +71,18 @@ jobs:
         if: always()
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
+
+      - name: Store test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results
+          path: '**/build/test-results/test/TEST-*.xml'
+
+      - name: Test Report Summary
+        if: always()
+        run: |
+          echo '## Test Report Summary' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          ./gradlew test --console=plain | grep -E "tests failed|tests succeeded" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
