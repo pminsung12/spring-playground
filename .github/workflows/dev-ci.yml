@@ -12,11 +12,11 @@ concurrency:
   group: deploy_dev
   cancel-in-progress: true
 
-env:
-  STAGE: dev
-  NCP_REGION: KR
-  NCP_CONTAINER_REGISTRY: your-container-registry
-  NCP_SERVER_NAME: your-server-name
+#env:
+#  STAGE: dev
+#  NCP_REGION: KR
+#  NCP_CONTAINER_REGISTRY: your-container-registry
+#  NCP_SERVER_NAME: your-server-name
 
 jobs:
   build-and-test:
@@ -84,5 +84,5 @@ jobs:
         run: |
           echo '## Test Report Summary' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          ./gradlew test --console=plain | grep -E "tests failed|tests succeeded" >> $GITHUB_STEP_SUMMARY
+          ./gradlew test --console=plain || true
           echo '```' >> $GITHUB_STEP_SUMMARY
